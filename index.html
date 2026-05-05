@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>INGRESO DE ORDENES DE TRABAJO</title>
+  <style> 
+    body {
+        font-family: sans-serif;
+        margin: 20px;
+    }
+    form {
+        max-width: 700px;
+    }
+    .fila {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+    label {
+        width: 180px;
+    }
+    input[type="text"],
+    input[type="date"],
+    input[type="number"],
+    select {
+        flex: 1;
+        min-width: 220px;
+    }
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 46px;
+        height: 24px;
+    }
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+    .slider {
+        position: absolute;
+        inset: 0;
+        cursor: pointer;
+        background-color: #c9c9c9;
+        border-radius: 999px;
+        transition: 0.2s;
+    }
+    .slider::before {
+        position: absolute;
+        content: "";
+        height: 18px;
+        width: 18px;
+        left: 3px;
+        top: 3px;
+        background-color: #fff;
+        border-radius: 50%;
+        transition: 0.2s;
+    }
+    .switch input:checked + .slider {
+        background-color: #4caf50;
+    }
+    .switch input:checked + .slider::before {
+        transform: translateX(22px);
+    }
+    .campo-detalle {
+        width: 170px;
+        min-width: 170px;
+    }
+    </style>
+  <script src="index.js" defer></script>
+</head>
+<body>
+  <h1>INGRESO DE ORDENES DE TRABAJO</h1>
+  <form id="miFormulario">
+    <div class="fila">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre" style="text-transform: uppercase;" required>
+    </div>
+
+    <div class="fila">
+      <label for="fecha">Fecha:</label>
+      <input type="date" id="fecha" name="fecha" required>
+    </div>
+
+    <div class="fila">
+      <label for="fechaCompromiso">Fecha compromiso:</label>
+      <input type="date" id="fechaCompromiso" name="fechaCompromiso" required>
+    </div>
+
+    <div class="fila">
+      <label for="lavanderia">Lavanderia:</label>
+      <label class="switch" for="lavanderia">
+        <input type="checkbox" id="lavanderia" name="lavanderia">
+        <span class="slider"></span>
+      </label>
+      <input type="number" id="kilos" name="kilos" class="campo-detalle" placeholder="Kilos" step="0.01" min="0" disabled>
+    </div>
+
+    <div class="fila">
+      <label for="tintoreria">Tintoreria:</label>
+      <label class="switch" for="tintoreria">
+        <input type="checkbox" id="tintoreria" name="tintoreria">
+        <span class="slider"></span>
+      </label>
+      <input type="number" id="piezasTintoreria" name="piezasTintoreria" class="campo-detalle" placeholder="Piezas Tintoreria" step="1" min="0" disabled>
+    </div>
+
+    <div class="fila">
+      <label for="planchado">Planchado:</label>
+      <label class="switch" for="planchado">
+        <input type="checkbox" id="planchado" name="planchado">
+        <span class="slider"></span>
+      </label>
+      <input type="number" id="piezasPlanchado" name="piezasPlanchado" class="campo-detalle" placeholder="Piezas Planchado" step="1" min="0" disabled>
+    </div>
+
+    <div class="fila">
+      <label for="adicionales">Adicionales:</label>
+      <input type="text" id="adicionales" name="adicionales">
+    </div>
+
+    <div class="fila">
+      <label for="contenedores">Contenedores:</label>
+      <input type="text" id="contenedores" name="contenedores">
+    </div>
+
+    <div class="fila">
+      <label for="comentarios">Comentarios:</label>
+      <input type="text" id="comentarios" name="comentarios">
+    </div>
+
+    <div class="fila">
+      <label for="aDomicilio">A domicilio:</label>
+      <select id="aDomicilio" name="aDomicilio" required>
+        <option value="" selected disabled>Selecciona una opcion</option>
+        <option value="Si">Si</option>
+        <option value="No">No</option>
+        <option value="Cortesia">Cortesia</option>
+        <option value="UPAEP">UPAEP</option>
+        <option value="Cuartos Prados">Cuartos Prados</option>
+        <option value="Cuartos Noria">Cuartos Noria</option>
+      </select>
+    </div>
+
+    <div class="fila">
+      <input type="submit" value="Ingresar">
+    </div>
+  </form>
+</body>
+</html>

@@ -1,4 +1,5 @@
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxV0RHWY0gKAGbIW4gjFcBhbgXKjVt-gdlTyVDa3cpcTMf8d87zZMY03aCaxcMvIrmq/exec";
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxst11x9QD5eoXUwKgu9aHYg4KDLFl-ic3uRDrRYpY77op5mQoX4tz5P1gMYBrT4edsxA/exec";
+
 const formulario = document.querySelector("#miFormulario");
 const nombreInput = document.querySelector("#nombre");
 const submitBtn = formulario.querySelector('input[type="submit"]');
@@ -24,6 +25,11 @@ function toggleCampoDetalle(switchId, inputId) {
   const actualizarEstado = () => {
     inputEl.disabled = !switchEl.checked;
     inputEl.required = switchEl.checked;
+    if (switchEl.checked) {
+      // Cuando se habilita el servicio, mover foco al campo de captura.
+      inputEl.focus();
+      inputEl.select();
+    }
     if (!switchEl.checked) {
       inputEl.value = "";
     }
@@ -72,6 +78,7 @@ function validarCamposNumericos() {
 
     if (!valor) {
       throw new Error(`Debes capturar '${item.nombre}' cuando el switch esta habilitado.`);
+      console.log("valor", valor);
     }
 
     if (!isNumero(valor)) {
@@ -123,16 +130,21 @@ formulario.addEventListener("submit", async (e) => {
     fecha: document.querySelector("#fecha").value,
     fechaCompromiso: document.querySelector("#fechaCompromiso").value,
     lavanderia: document.querySelector("#lavanderia").checked,
-    kilos: document.querySelector("#kilos").value,
     tintoreria: document.querySelector("#tintoreria").checked,
-    piezasTintoreria: document.querySelector("#piezasTintoreria").value,
     planchado: document.querySelector("#planchado").checked,
+    listoLavanderia: document.false,
+    listoTintoreria: document.false,
+    listoPlanchado: document.false,
+    kilos: document.querySelector("#kilos").value,
+    piezasTintoreria: document.querySelector("#piezasTintoreria").value,
     piezasPlanchado: document.querySelector("#piezasPlanchado").value,
     adicionales: document.querySelector("#adicionales").value,
-    contenedores: document.querySelector("#contenedores").value,
     comentarios: document.querySelector("#comentarios").value,
+    contenedores: document.querySelector("#contenedores").value,
     aDomicilio: document.querySelector("#aDomicilio").value
   };
+
+  console.log("payload", payload);
 
   try {
     await enviarAGoogleSheets(payload);
